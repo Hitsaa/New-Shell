@@ -32,11 +32,6 @@ char *input_redirection_file;
 char *output_redirection_file;
 extern char** environ;
 
-void sigintHandler(int sig_num)
-{
-    signal(SIGINT, sigintHandler);
-    fflush(stdout);
-}
 void clear_variables()
 {
   fd =0;
@@ -53,6 +48,12 @@ void clear_variables()
   pid=0;
   environmment_flag=0;
   bang_flag=0;
+}
+
+void sigintHandler(int sig_num)
+{
+    signal(SIGINT, sigintHandler);
+    fflush(stdout);
 }
   
 void fileprocess ()
@@ -86,6 +87,7 @@ void fileprocess ()
     while (bytes_read == sizeof (buffer)); 
     close (fd); 
 }
+
 void filewrite()
 {
   
@@ -111,6 +113,7 @@ void filewrite()
   close(fd_out);
 
 }
+
 void bang_execute()
 {
   char bang_val[1000];
